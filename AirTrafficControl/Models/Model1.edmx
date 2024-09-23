@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AirTrafficControlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Centre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="90" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommercialName" Type="nvarchar" MaxLength="150" />
+          <Property Name="CommercialNo" Type="int" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployerName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Convention">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConventionTypeId" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="ConventionDate" Type="date" />
+          <Property Name="StatesId" Type="int" />
+        </EntityType>
+        <EntityType Name="ConventionDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConventionId" Type="int" />
+          <Property Name="ConventionPath" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConventionAddress" Type="nvarchar" MaxLength="90" />
+        </EntityType>
+        <EntityType Name="ConventionStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConventionId" Type="int" />
+          <Property Name="StageId" Type="int" />
+          <Property Name="InDate" Type="date" />
+          <Property Name="ExitDate" Type="date" />
+        </EntityType>
+        <EntityType Name="ConventionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Licenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicensesTypeId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="CenterId" Type="int" />
+          <Property Name="Statement" Type="nvarchar" MaxLength="200" />
+          <Property Name="IssueDate" Type="date" />
+          <Property Name="ExpiryDate" Type="date" />
+          <Property Name="IsPayed" Type="bit" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <EntityType Name="LicensesType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Statement" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PaymentReceipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicensesId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Stamp" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentReceiptPath" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreatedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="90" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Convention_ConventionType">
+          <End Role="ConventionType" Type="Self.ConventionType" Multiplicity="0..1" />
+          <End Role="Convention" Type="Self.Convention" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConventionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Convention">
+              <PropertyRef Name="ConventionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Convention_States">
+          <End Role="States" Type="Self.States" Multiplicity="0..1" />
+          <End Role="Convention" Type="Self.Convention" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Convention">
+              <PropertyRef Name="StatesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConventionDocument_Convention">
+          <End Role="Convention" Type="Self.Convention" Multiplicity="0..1" />
+          <End Role="ConventionDocument" Type="Self.ConventionDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Convention">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConventionDocument">
+              <PropertyRef Name="ConventionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConventionStage_Convention">
+          <End Role="Convention" Type="Self.Convention" Multiplicity="0..1" />
+          <End Role="ConventionStage" Type="Self.ConventionStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Convention">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConventionStage">
+              <PropertyRef Name="ConventionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConventionStage_Stage">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="ConventionStage" Type="Self.ConventionStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConventionStage">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_Centre">
+          <End Role="Centre" Type="Self.Centre" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="CenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_LicensesType">
+          <End Role="LicensesType" Type="Self.LicensesType" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicensesType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="LicensesTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceipt_Licenses">
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="0..1" />
+          <End Role="PaymentReceipt" Type="Self.PaymentReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentReceipt">
+              <PropertyRef Name="LicensesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AirTrafficControlModelStoreContainer">
+          <EntitySet Name="Centre" EntityType="Self.Centre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Convention" EntityType="Self.Convention" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConventionDocument" EntityType="Self.ConventionDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConventionStage" EntityType="Self.ConventionStage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConventionType" EntityType="Self.ConventionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicensesType" EntityType="Self.LicensesType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentReceipt" EntityType="Self.PaymentReceipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Convention_ConventionType" Association="Self.FK_Convention_ConventionType">
+            <End Role="ConventionType" EntitySet="ConventionType" />
+            <End Role="Convention" EntitySet="Convention" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Convention_States" Association="Self.FK_Convention_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Convention" EntitySet="Convention" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConventionDocument_Convention" Association="Self.FK_ConventionDocument_Convention">
+            <End Role="Convention" EntitySet="Convention" />
+            <End Role="ConventionDocument" EntitySet="ConventionDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConventionStage_Convention" Association="Self.FK_ConventionStage_Convention">
+            <End Role="Convention" EntitySet="Convention" />
+            <End Role="ConventionStage" EntitySet="ConventionStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConventionStage_Stage" Association="Self.FK_ConventionStage_Stage">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="ConventionStage" EntitySet="ConventionStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_Centre" Association="Self.FK_Licenses_Centre">
+            <End Role="Centre" EntitySet="Centre" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_Company" Association="Self.FK_Licenses_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_LicensesType" Association="Self.FK_Licenses_LicensesType">
+            <End Role="LicensesType" EntitySet="LicensesType" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceipt_Licenses" Association="Self.FK_PaymentReceipt_Licenses">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="PaymentReceipt" EntitySet="PaymentReceipt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AirTrafficControlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Centre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_Licenses_Centre" FromRole="Centre" ToRole="Licenses" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommercialName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CommercialNo" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_Licenses_Company" FromRole="Company" ToRole="Licenses" />
+        </EntityType>
+        <EntityType Name="Convention">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConventionTypeId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ConventionDate" Type="DateTime" Precision="0" />
+          <Property Name="StatesId" Type="Int32" />
+          <NavigationProperty Name="State" Relationship="Self.FK_Convention_States" FromRole="Convention" ToRole="States" />
+          <NavigationProperty Name="ConventionDocuments" Relationship="Self.FK_ConventionDocument_Convention" FromRole="Convention" ToRole="ConventionDocument" />
+          <NavigationProperty Name="ConventionStages" Relationship="Self.FK_ConventionStage_Convention" FromRole="Convention" ToRole="ConventionStage" />
+          <NavigationProperty Name="ConventionType" Relationship="AirTrafficControlModel.FK_Convention_ConventionType" FromRole="Convention" ToRole="ConventionType" />
+        </EntityType>
+        <EntityType Name="ConventionDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConventionId" Type="Int32" />
+          <Property Name="ConventionPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConventionAddress" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Convention" Relationship="Self.FK_ConventionDocument_Convention" FromRole="ConventionDocument" ToRole="Convention" />
+        </EntityType>
+        <EntityType Name="ConventionStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConventionId" Type="Int32" />
+          <Property Name="StageId" Type="Int32" />
+          <Property Name="InDate" Type="DateTime" Precision="0" />
+          <Property Name="ExitDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Convention" Relationship="Self.FK_ConventionStage_Convention" FromRole="ConventionStage" ToRole="Convention" />
+          <NavigationProperty Name="Stage" Relationship="Self.FK_ConventionStage_Stage" FromRole="ConventionStage" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="ConventionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Conventions" Relationship="AirTrafficControlModel.FK_Convention_ConventionType" FromRole="ConventionType" ToRole="Convention" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicensesTypeId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CenterId" Type="Int32" />
+          <Property Name="Statement" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IssueDate" Type="DateTime" Precision="0" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="IsPayed" Type="Boolean" />
+          <Property Name="Year" Type="Int32" />
+          <NavigationProperty Name="Centre" Relationship="Self.FK_Licenses_Centre" FromRole="Licenses" ToRole="Centre" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Licenses_Company" FromRole="Licenses" ToRole="Company" />
+          <NavigationProperty Name="LicensesType" Relationship="Self.FK_Licenses_LicensesType" FromRole="Licenses" ToRole="LicensesType" />
+          <NavigationProperty Name="PaymentReceipts" Relationship="Self.FK_PaymentReceipt_Licenses" FromRole="Licenses" ToRole="PaymentReceipt" />
+        </EntityType>
+        <EntityType Name="LicensesType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Statement" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_Licenses_LicensesType" FromRole="LicensesType" ToRole="Licenses" />
+        </EntityType>
+        <EntityType Name="PaymentReceipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicensesId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Stamp" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentReceiptPath" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="License" Relationship="Self.FK_PaymentReceipt_Licenses" FromRole="PaymentReceipt" ToRole="Licenses" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ConventionStages" Relationship="Self.FK_ConventionStage_Stage" FromRole="Stage" ToRole="ConventionStage" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Conventions" Relationship="Self.FK_Convention_States" FromRole="States" ToRole="Convention" />
+        </EntityType>
+        <Association Name="FK_Licenses_Centre">
+          <End Role="Centre" Type="Self.Centre" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="CenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Convention_States">
+          <End Role="States" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Convention" Type="Self.Convention" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Convention">
+              <PropertyRef Name="StatesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConventionDocument_Convention">
+          <End Role="Convention" Type="Self.Convention" Multiplicity="0..1" />
+          <End Role="ConventionDocument" Type="Self.ConventionDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Convention">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConventionDocument">
+              <PropertyRef Name="ConventionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConventionStage_Convention">
+          <End Role="Convention" Type="Self.Convention" Multiplicity="0..1" />
+          <End Role="ConventionStage" Type="Self.ConventionStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Convention">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConventionStage">
+              <PropertyRef Name="ConventionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConventionStage_Stage">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="ConventionStage" Type="Self.ConventionStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConventionStage">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_LicensesType">
+          <End Role="LicensesType" Type="Self.LicensesType" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicensesType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="LicensesTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceipt_Licenses">
+          <End Role="Licenses" Type="Self.License" Multiplicity="0..1" />
+          <End Role="PaymentReceipt" Type="Self.PaymentReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentReceipt">
+              <PropertyRef Name="LicensesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Centres" EntityType="Self.Centre" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Conventions" EntityType="Self.Convention" />
+          <EntitySet Name="ConventionDocuments" EntityType="Self.ConventionDocument" />
+          <EntitySet Name="ConventionStages" EntityType="Self.ConventionStage" />
+          <EntitySet Name="ConventionTypes" EntityType="Self.ConventionType" />
+          <EntitySet Name="Licenses" EntityType="Self.License" />
+          <EntitySet Name="LicensesTypes" EntityType="Self.LicensesType" />
+          <EntitySet Name="PaymentReceipts" EntityType="Self.PaymentReceipt" />
+          <EntitySet Name="Stages" EntityType="Self.Stage" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <AssociationSet Name="FK_Licenses_Centre" Association="Self.FK_Licenses_Centre">
+            <End Role="Centre" EntitySet="Centres" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_Company" Association="Self.FK_Licenses_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Convention_States" Association="Self.FK_Convention_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Convention" EntitySet="Conventions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConventionDocument_Convention" Association="Self.FK_ConventionDocument_Convention">
+            <End Role="Convention" EntitySet="Conventions" />
+            <End Role="ConventionDocument" EntitySet="ConventionDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConventionStage_Convention" Association="Self.FK_ConventionStage_Convention">
+            <End Role="Convention" EntitySet="Conventions" />
+            <End Role="ConventionStage" EntitySet="ConventionStages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConventionStage_Stage" Association="Self.FK_ConventionStage_Stage">
+            <End Role="Stage" EntitySet="Stages" />
+            <End Role="ConventionStage" EntitySet="ConventionStages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_LicensesType" Association="Self.FK_Licenses_LicensesType">
+            <End Role="LicensesType" EntitySet="LicensesTypes" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceipt_Licenses" Association="Self.FK_PaymentReceipt_Licenses">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="PaymentReceipt" EntitySet="PaymentReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Convention_ConventionType" Association="AirTrafficControlModel.FK_Convention_ConventionType">
+            <End Role="ConventionType" EntitySet="ConventionTypes" />
+            <End Role="Convention" EntitySet="Conventions" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Convention_ConventionType">
+          <End Type="AirTrafficControlModel.ConventionType" Role="ConventionType" Multiplicity="0..1" />
+          <End Type="AirTrafficControlModel.Convention" Role="Convention" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConventionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Convention">
+              <PropertyRef Name="ConventionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AirTrafficControlModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Centres">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.Centre">
+              <MappingFragment StoreEntitySet="Centre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CommercialName" ColumnName="CommercialName" />
+                <ScalarProperty Name="CommercialNo" ColumnName="CommercialNo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conventions">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.Convention">
+              <MappingFragment StoreEntitySet="Convention">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConventionTypeId" ColumnName="ConventionTypeId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ConventionDate" ColumnName="ConventionDate" />
+                <ScalarProperty Name="StatesId" ColumnName="StatesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConventionDocuments">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.ConventionDocument">
+              <MappingFragment StoreEntitySet="ConventionDocument">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConventionId" ColumnName="ConventionId" />
+                <ScalarProperty Name="ConventionPath" ColumnName="ConventionPath" />
+                <ScalarProperty Name="ConventionAddress" ColumnName="ConventionAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConventionStages">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.ConventionStage">
+              <MappingFragment StoreEntitySet="ConventionStage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConventionId" ColumnName="ConventionId" />
+                <ScalarProperty Name="StageId" ColumnName="StageId" />
+                <ScalarProperty Name="InDate" ColumnName="InDate" />
+                <ScalarProperty Name="ExitDate" ColumnName="ExitDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConventionTypes">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.ConventionType">
+              <MappingFragment StoreEntitySet="ConventionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.License">
+              <MappingFragment StoreEntitySet="Licenses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LicensesTypeId" ColumnName="LicensesTypeId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CenterId" ColumnName="CenterId" />
+                <ScalarProperty Name="Statement" ColumnName="Statement" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicensesTypes">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.LicensesType">
+              <MappingFragment StoreEntitySet="LicensesType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Statement" ColumnName="Statement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentReceipts">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.PaymentReceipt">
+              <MappingFragment StoreEntitySet="PaymentReceipt">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LicensesId" ColumnName="LicensesId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="PaymentReceiptPath" ColumnName="PaymentReceiptPath" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stages">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.Stage">
+              <MappingFragment StoreEntitySet="Stage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="AirTrafficControlModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
