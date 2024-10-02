@@ -1,0 +1,384 @@
+﻿@using AirTrafficControl.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ar_Layout.cshtml";
+}
+
+@section content{
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="grad"></div>
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                إذن توريد مالى-غير مدفوعه
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-home"></i>الملاحة الجوية </a></li>
+                <li class="active"> التوريد</li>
+            </ol>
+
+        </section>
+
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <a href="@Url.Action("Index","PaymentReceipts")" class="btn btn-primary pull-left btn-add">   مدفوع <i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                            @*<button type="button" class="btn btn-primary pull-left btn-add" data-toggle="modal" data-target="#add-modal"><i class="fa fa-plus-square">  </i> إضافة توريد </button>*@
+                            @*<button type="button" class="btn btn-success pull-right btn-add" onclick="print()"><i class="fa fa-print">  </i>  طباعة </button>*@
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tbx" class="table table-bordered table-hover"></table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </section>
+
+
+    </div><!-- /.content-wrapper -->
+
+
+
+
+
+    <div class="example-modal">
+        <div class="modal fade in" id="add-modal">
+            <div class="modal-dialog" style="width:80% !important">
+                <div class="modal-content">
+                    <div class="modal-header .no-border">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> إذن توريد </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form method="post" id="add-form">
+                                    <div class="box .no-border">
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <!-- Input addon -->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="price"> السعر </label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                                <input class="form-control  price" name="price" id="price" placeholder="السعر" autocomplete="off" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="tax">  الضريبة </label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-user"></i>
+                                                                </div>
+                                                                <input class="form-control  tax" name="tax" id="tax" placeholder="الضريبة" autocomplete="off" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="stamp">  الدمغه </label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-user"></i>
+                                                                </div>
+                                                                <input class="form-control  stamp" name="stamp" id="stamp" placeholder="الدمغه" autocomplete="off" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="paymentReceiptPath">  صوره من التوريد </label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-user"></i>
+                                                                </div>
+                                                                <input class="form-control  paymentReceiptPath" name="paymentReceiptPath" id="paymentReceiptPath" type="file" placeholder=" اضافة توريد" autocomplete="off" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <button type="submit" class="btn btn-primary save" value="save" style="width: 100%;position: relative;top: 25px;">توريد</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div><!-- /.row (main row) -->
+
+                    </div>
+                    @*<div class="modal-footer">
+
+                        </div>*@
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+
+
+    @* Edit Model *@
+
+
+<div class="example-modal">
+    <div class="modal fade in" id="edit-modal">
+        <div class="modal-dialog" style="width:80% !important">
+            <div class="modal-content">
+                <div class="modal-header .no-border">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"> إذن توريد </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form method="post" id="edit-form">
+                                <div class="box .no-border">
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <!-- Input addon -->
+                                        <div class="row">
+                                            <label id="paymentReceiptId" style="display:none;"></label>
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edprice"> السعر </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                            <input class="form-control  edprice" name="edprice" id="edprice" placeholder="السعر" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edtax">  الضريبة </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa  fa-user"></i>
+                                                            </div>
+                                                            <input class="form-control  edtax" name="edtax" id="edtax" placeholder="الضريبة" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edstamp">  الدمغه </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa  fa-user"></i>
+                                                            </div>
+                                                            <input class="form-control  edstamp" name="edstamp" id="edstamp" placeholder="الدمغه" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edpaymentReceiptPath">  صوره من التوريد </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa  fa-user"></i>
+                                                            </div>
+                                                            <input class="form-control  edpaymentReceiptPath" name="edpaymentReceiptPath" id="edpaymentReceiptPath" type="file" placeholder=" اضافة توريد" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <button type="submit" class="btn btn-primary edit" value="edit" style="width: 100%;position: relative;top: 25px;">توريد</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+
+                            </form>
+                        </div>
+                    </div><!-- /.row (main row) -->
+
+                </div>
+                @*<div class="modal-footer">
+
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+
+
+
+}
+
+
+@section scripts{
+
+    <script>
+        var dataTable;
+        $(function () {
+
+            function loadData() {
+                dataTable = $('#tbx').DataTable({
+                    "language": {
+                        "lengthMenu": "عرض _MENU_ سجل في الصفحة",
+                        "search": "بحث"
+                    },
+                    ajax: {
+                        url: '/PaymentReceipts/LoadDataForLicense',
+                        dataSrc: ''
+                    },
+                    columns: [
+                        {
+                            "title": "# ",
+                            "data": "Id"
+                        },
+                        {
+                            "title": "نوع الترخيص",
+                            "data": "LicensesType"
+                        },
+                        {
+                            "title": "اسم العمل- الشركة",
+                            "data": "Company"
+                        },
+                        {
+                            "title": "المركز",
+                            "data": "Center"
+                        },
+                        {
+                            "title": "النص",
+                            "data": "Statement"
+                        },
+                        {
+                            "title": "تاريخ التصديق",
+                            "data": "IssueDate"
+                        },
+                        {
+                            "title": "تاريخ الانتهاء",
+                            "data": "ExpiryDate"
+                        },
+                        {
+                            "title": "العام",
+                            "data" : "Year"
+                        },
+                        {
+                            "title": "حالة الدفع",
+                            "data": "Status"
+                        },
+                        {
+                            "title": "<i class='fa fa-cog'></i>",
+                            "data": null,
+                            "width": "10%",
+                            "orderable": false,
+                            "render": function (data) {
+                                return '<div class="btn-opreation">'
+                                             + '<button class="btn btn-primary pull-left btn-add " onclick="editPaymentReceipt(' + data.Id + ')">إضافة اذن التوريد<i class=" transfer-fa fa  fa-edit"></i></button> '
+                                    + '</div> ';
+
+                            }
+                        }
+
+
+                    ]
+
+                });
+
+            }
+            loadData();
+
+
+            function save() {
+
+                var ob = {
+                    "LicenseId": $('#paymentReceiptId').text(),
+                    "price": $('#edprice').val(),
+                    "tax": $('#edtax').val(),
+                    "stamp": $('#edstamp').val(),
+                };
+
+                debugger;
+                // Create a FormData object
+                var formData = new FormData();
+
+                formData.append('Price', ob.price);
+                formData.append('Tax', ob.tax);
+                formData.append('Stamp', ob.stamp);
+                formData.append('LicenseId', ob.LicenseId);
+
+                // Append file if present
+                var fileUpload = $("#edpaymentReceiptPath").get(0);
+                var files = fileUpload.files;
+                if (files.length > 0) {
+                    formData.append('paymentReceiptPath', files[0]);
+                }
+
+               
+                    $.ajax({
+                        url: "@Url.Action("Create", "PaymentReceipts")",
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            toastr[response.Status](response.Message, response.Title);
+                            $('#add-form').bootstrapValidator('resetForm', true);
+                            $('#add-modal').modal('hide');
+                            dataTable.ajax.reload();
+                        },
+                        error: function (response) {
+                            toastr[response.Status](response.Message, response.Title);
+                        }
+                    });
+            };
+
+            $('#edit-form').bootstrapValidator({
+                onSuccess: function (e) {
+                    save();
+                    e.preventDefault();
+
+                },
+                submitButtons: 'button[type="submit"]',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok success-feedback-icons',
+                    invalid: 'glyphicon glyphicon-remove error-feedback-icons',
+                    validating: 'fa fa-refresh fa-spin success-feedback-icons'
+                },
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون حقل اسم الموظف  فارغ'
+                            }
+                        }
+                    },
+                }
+            });
+        });//End Document Ready
+
+        function editPaymentReceipt(id) {
+            $('#paymentReceiptId').text(id);
+            $('#edit-modal').modal("show");
+        }
+    </script>
+
+}
+
