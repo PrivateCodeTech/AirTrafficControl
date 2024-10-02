@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace AirTrafficControl.Controllers
 {
-    // دي الجزئية الخاصة بي التراخيص لي الشركات الاجنبية او الغير ممثلة بالسودان
     public class LicensesForignController : Controller
     {
         private Entities db = new Entities();
