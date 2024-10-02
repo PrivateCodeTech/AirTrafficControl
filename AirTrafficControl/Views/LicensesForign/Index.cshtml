@@ -1,0 +1,501 @@
+﻿@using AirTrafficControl.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ar_Layout.cshtml";
+}
+
+@section content{
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="grad"></div>
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                ترخيص وكالات اجنبية
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-home"></i>النقل الجوي </a></li>
+                <li class="active"> التراخيص</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <button type="button" class="btn btn-primary pull-left btn-add" data-toggle="modal" data-target="#add-modal"><i class="fa fa-plus-square">  </i> إضافة ترخيص </button>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tbx" class="table table-bordered table-hover"></table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </section>
+    </div><!-- /.content-wrapper -->
+
+    <div class="example-modal">
+        <div class="modal fade in" id="add-modal">
+            <div class="modal-dialog" style="width:80% !important">
+                <div class="modal-content">
+                    <div class="modal-header .no-border">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> ترخيص جديد </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form method="post" id="add-form">
+                                    <div class="box .no-border">
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <!-- Input addon -->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="CompanyId"> الشركة / الوكالة </label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                                <select type="text" class="form-control list CompanyId" id="CompanyId" name="CompanyId" style="width:100%">
+                                                                    @{
+                                                                        Entities db = new Entities();
+                                                                        foreach (var item in db.Companies.ToList())
+                                                                        {
+                                                                            <option value="@item.Id">@item.CommercialName</option>
+                                                                        }
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="CenterId"> المركز</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                                <select type="text" class="form-control list CenterId" id="CenterId" name="CenterId" style="width:100%">
+                                                                    @{
+                                                                        foreach (var item in db.Centres.ToList())
+                                                                        {
+                                                                            <option value="@item.Id">@item.Name</option>
+                                                                        }
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="Statement"> الموضوع </label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                                <textarea class="form-control Statement" name="Statement" id="Statement" rows="4" placeholder="الموضوع" autocomplete="off"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="IssueDate">  تاريخ الترخيص </label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-user"></i>
+                                                                </div>
+                                                                <input type="date" class="form-control  IssueDate" name="IssueDate" id="IssueDate" placeholder="تاريخ الترخيص" autocomplete="off" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="ExpiryDate">  تاريخ الانتهاء </label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-user"></i>
+                                                                </div>
+                                                                <input type="date" class="form-control ExpiryDate" name="ExpiryDate" id="ExpiryDate" placeholder="تاريخ الانتهاء" autocomplete="off" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <button type="submit" class="btn btn-primary save" value="save" style="width: 100%;position: relative;top: 25px;">حفظ</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div><!-- /.row (main row) -->
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+    @* Edit Model *@
+<div class="example-modal">
+    <div class="modal fade in" id="edit-modal">
+        <div class="modal-dialog" style="width:80% !important">
+            <div class="modal-content">
+                <div class="modal-header .no-border">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"> تعديل الترخيص  </h4>
+                    <label style="display:none" id="LicensesId"></label>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form method="post" id="edit-form">
+                                <div class="box .no-border">
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <!-- Input addon -->
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edCompanyId"> الشركة / الوكالة </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                            <select type="text" class="form-control list edCompanyId" id="edCompanyId" name="edCompanyId" style="width:100%">
+                                                                @{
+                                                                    foreach (var item in db.Companies.ToList())
+                                                                    {
+                                                                        <option value="@item.Id">@item.CommercialName</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edCenterId"> المركز</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                            <select type="text" class="form-control list edCenterId" id="edCenterId" name="edCenterId" style="width:100%">
+                                                                @{
+                                                                    foreach (var item in db.Centres.ToList())
+                                                                    {
+                                                                        <option value="@item.Id">@item.Name</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label for="edStatement"> الموضوع </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                            <textarea class="form-control edStatement" name="edStatement" id="edStatement" rows="4" placeholder="الموضوع" autocomplete="off"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edIssueDate">  تاريخ الترخيص </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa  fa-user"></i>
+                                                            </div>
+                                                            <input type="date" class="form-control edIssueDate" name="edIssueDate" id="edIssueDate" placeholder="تاريخ الترخيص" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="edExpiryDate">  تاريخ الانتهاء </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa  fa-user"></i>
+                                                            </div>
+                                                            <input type="date" class="form-control edExpiryDate" name="edExpiryDate" id="edExpiryDate" placeholder="تاريخ الانتهاء" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3">
+                                                    <button type="submit" class="btn btn-warning edit" value="edit" style="width: 100%;position: relative;top: 25px;">تعديل</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+
+                            </form>
+                        </div>
+                    </div><!-- /.row (main row) -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+}
+
+@section scripts{
+    <script>
+        var dataTable;
+        $(function () {
+
+            function loadData() {
+                dataTable = $('#tbx').DataTable({
+                    "language": {
+                        "lengthMenu": "عرض _MENU_ سجل في الصفحة",
+                        "search": "بحث"
+                    },
+                    ajax: {
+                        url: '/LicensesForign/LoadData',
+                        dataSrc: ''
+                    },
+                    columns: [
+                        {
+                            "title": "# ",
+                            "data": "Id"
+                        },
+                        {
+                            "title": "نوع الترخيص",
+                            "data": "LicensesTypeName"
+                        },
+                        {
+                            "title": "الشركة",
+                            "data": "CompanyName"
+                        },
+                        {
+                            "title": "المركز",
+                            "data": "CenterName"
+                        },
+                        {
+                            "title": "الموضوع",
+                            "data": "Statement"
+                        },
+                        {
+                            "title": "تاريخ التصديق",
+                            "data": "IssueDateStr"
+                        },
+                        {
+                            "title": "تاريخ الصلاحية",
+                            "data": "ExpiryDateStr",
+                        },
+                        {
+                            "title": "العام",
+                            "data": "Year"
+                        },
+                        {
+                            "title": "حالة الدفع",
+                            "data": "PaymentStatus"
+                        },
+                        {
+                            "title": "<i class='fa fa-cog'></i>",
+                            "data": null,
+                            "width": "10%",
+                            "orderable": false,
+                            "render": function (data) {
+                                return '<div class="btn-opreation">'
+                                             + '<button class="btn btn-warning transfer " onclick="editLicenses(' + data.Id + ')">تعديل<i class=" transfer-fa fa  fa-edit"></i></button> '
+                                    + '</div> ';
+
+                            }
+                        }
+                    ]
+
+                });
+
+            }
+            loadData();
+
+            function save()
+            {
+                var myObj = {
+                    "CompanyId": $('#CompanyId').val(),
+                    "CenterId": $('#CenterId').val(),
+                    "Statement": $('#Statement').val(),
+                    "IssueDate": $('#IssueDate').val(),
+                    "ExpiryDate": $('#ExpiryDate').val(),
+                };
+
+                console.clear();
+                console.log(myObj);
+
+                $.ajax({
+                    url: "@Url.Action("Create", "LicensesForign")",
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: "application/json",
+                    data: JSON.stringify(myObj),
+                    success: function (response) {
+                        toastr[response.Status](response.Message, response.Title);
+                        $('#add-form').bootstrapValidator('resetForm', true);
+                        $('#add-modal').modal('hide');
+                        dataTable.ajax.reload();
+                    },
+                    error: function (response) {
+                        toastr[response.Status](response.Message, response.Title);
+                    }
+                });
+            };
+
+            
+            function edit()
+            {
+                var myObj = {
+                    "Id": $('#LicensesId').text(),
+                    "CompanyId": $('#edCompanyId').val(),
+                    "CenterId": $('#edCenterId').val(),
+                    "Statement": $('#edStatement').val(),
+                    "IssueDate": $('#edIssueDate').val(),
+                    "ExpiryDate": $('#edExpiryDate').val(),
+                };
+
+                console.clear();
+                console.log(myObj);
+
+                $.ajax({
+                    url: "@Url.Action("Edit", "LicensesForign")",
+                    type: "POST",
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(myObj),
+                success: function (response) {
+                    toastr[response.Status](response.Message, response.Title);
+                    $('#add-form').bootstrapValidator('resetForm', true);
+                    $('#add-modal').modal('hide');
+                    dataTable.ajax.reload();
+                },
+                error: function (response) {
+                    toastr[response.Status](response.Message, response.Title);
+                }
+            });
+        };
+
+            $('#add-form').bootstrapValidator({
+                onSuccess: function (e) {
+                    save();
+                    e.preventDefault();
+                },
+                submitButtons: 'button[type="submit"]',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok success-feedback-icons',
+                    invalid: 'glyphicon glyphicon-remove error-feedback-icons',
+                    validating: 'fa fa-refresh fa-spin success-feedback-icons'
+                },
+                fields: {
+                    CompanyId: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب اختيار الشركة / الوكالة'
+                            }
+                        }
+                    },
+                    CenterId: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب اختيار المركز'
+                            }
+                        }
+                    },
+                    Statement: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون حقل الموضوع فارغ'
+                            }
+                        }
+                    },
+                    IssueDate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب ادخال تاريخ الترخيص'
+                            }
+                        }
+                    },
+                    ExpiryDate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب ادخال تاريخ نهاية الترخيص'
+                            }
+                        }
+                    },
+                }
+            });
+
+            $('#edit-form').bootstrapValidator({
+                onSuccess: function (e) {
+                    edit();
+                    e.preventDefault();
+                },
+                submitButtons: 'button[type="submit"]',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok success-feedback-icons',
+                    invalid: 'glyphicon glyphicon-remove error-feedback-icons',
+                    validating: 'fa fa-refresh fa-spin success-feedback-icons'
+                },
+                fields: {
+                    edCompanyId: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب اختيار الشركة / الوكالة'
+                            }
+                        }
+                    },
+                    edCenterId: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب اختيار المركز'
+                            }
+                        }
+                    },
+                    edStatement: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون حقل الموضوع فارغ'
+                            }
+                        }
+                    },
+                    edIssueDate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب ادخال تاريخ الترخيص'
+                            }
+                        }
+                    },
+                    edExpiryDate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب ادخال تاريخ نهاية الترخيص'
+                            }
+                        }
+                    },
+                }
+            });
+
+        });//End Document Ready
+
+        function editLicenses(id) {
+            console.log(id);
+            $('#LicensesId').text(id);
+            $('#edit-modal').modal("show");
+        }
+
+    </script>
+}
