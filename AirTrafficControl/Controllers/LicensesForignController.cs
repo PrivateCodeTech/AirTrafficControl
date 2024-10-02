@@ -134,5 +134,10 @@ namespace AirTrafficControl.Controllers
                 return Json(new { Status = "error", Title = "خطأ", Message = "عفوا يوجد خطأ في عملية الحفظ" }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }
