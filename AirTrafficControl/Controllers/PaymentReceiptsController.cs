@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -52,6 +52,7 @@ namespace AirTrafficControl.Controllers
                 Company = p.Company.CommercialName,
                 Center = p.Centre.Name,
                 Statement = p.Statement,
+                Price = p.LicensesType.Price,
                 ExpiryDate = p.ExpiryDate.Value.Day + "/" + p.ExpiryDate.Value.Month + "/" + p.ExpiryDate.Value.Year,
                 Year = p.Year,
                 Status = p.IsPayed == true ? "مدفوعه" : "غير مدفوعة",
