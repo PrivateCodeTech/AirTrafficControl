@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +37,13 @@
         @@font-face {
             font-family: 'BoutrosNewsH1-Bold';
             src: url(../../AdminLTE-RTL-master/dist/fonts/BoutrosNewsH1-Bold.ttf);
+
         }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+        text-align: right;
+       }
+         
+
     </style>
 </head>
 <body class="skin-blue sidebar-mini" >
@@ -344,8 +350,8 @@
                             <span class="label label-warning pull-left">2</span>
                         </a>
                         <ul class="treeview-menu">
-                            @*<li><a href="@Url.Action("Index","")"><i class="fa fa-circle-o text-warning"></i>   </a></li>*@
-                            @*<li><a href="@Url.Action("Index","") "><i class="fa fa-circle-o text-warning"></i> </a></li>*@
+                            <li><a href="@Url.Action("EconomicLicense","EconomicLicense")"><i class="fa fa-circle-o text-warning"></i>  رخصة اقتصادية  </a></li>
+                            <li><a href="@Url.Action("TSLForForeign","EconomicLicense") "><i class="fa fa-circle-o text-warning"></i> ترخيص تذاكر شركة الطيران </a></li>*
                         </ul>
                     </li>
                     @*<li>
