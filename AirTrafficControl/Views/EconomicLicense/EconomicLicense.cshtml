@@ -1,0 +1,894 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ar_Layout.cshtml";
+
+}
+
+@section content{
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="grad"></div>
+
+
+        <section class="content-header">
+            <h1>
+               رخصة اقتصادية
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-home"></i>رخصة اقتصادية</a></li>
+                <li class="active">  استخراج ترخيص</li>
+            </ol>
+
+        </section>
+
+
+
+
+
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+
+
+                    <div class="box">
+                        <div class="box-header">
+                            <button type="button" id="btnaddlicense" class="btn btn-primary pull-left btn-add" data-toggle="modal" data-target="#add-modal"><i class="fa fa-plus-square">  </i> اضافة ترخيص  جديد </button>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="dataTable" class="table table-bordered table-sm text-center" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>الرقم</th>
+                                        <th>نوع الرخصة</th>
+                                        <th> الشركة</th>
+                                        <th> المركز</th>
+                                        <th> البيان</th>
+                                        <th> تاريخ الاصدار</th>
+                                        <th> الانتهاء</th>
+                                        <th> مدفوع</th>
+
+                                        <th>العمليات</th>
+
+                                    </tr>
+                                </thead>
+
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+    </div><!-- /.content-wrapper -->
+
+
+
+
+    <div class="example-modal">
+        <div class="modal fade in" id="add-modal">
+            <div class="modal-dialog" style="width:80% !important">
+                <div class="modal-content">
+                    <div class="modal-header .no-border">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> إضافة رخصة اقتصادية</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form method="post" id="add-form">
+                                    <div class="box .no-border">
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <!-- Input addon -->
+                                            <div class="row">
+
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6">
+                                                       
+                                                         @*<div class="form-group">
+                                                            <label for="addlicensestypeid">نوع الترخيص</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <select type="text" id="addlicensestypeid" name="addlicensestypeid" class="form-control addlicensestypeid list" placeholder="نوع الترخيص" style="width:100%"></select>
+                                                            </div>
+                                                        </div>*@
+
+                                                        <div class="form-group">
+                                                            <label for="addcompanyid"> الشركة</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <select type="text" id="addcompanyid" name="addcompanyid" class="form-control addcompanyid list" placeholder="نوع الترخيص" style="width:100%"></select>
+                                                            </div>
+                                                        </div>
+
+                                                       
+
+
+
+                                                        <div class="form-group">
+                                                            <label for="addissuedate"> تاريخ الاصدار</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <input class="form-control birthdate calendar" name="addissuedate" id="addissuedate" placeholder="تاريخ الاصدار" autocomplete="off">
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="addexpirydate"> تاريخ الانتهاء</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <input class="form-control birthdate calendar" name="addexpirydate" id="addexpirydate" placeholder="تاريخ الانتهاء" autocomplete="off">
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+
+                                                       
+
+
+                                                        <div class="form-group">
+                                                            <label for="addstatement"> البيان</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <input type="text" id="addstatement" name="addstatement" class="form-control addstatement" placeholder=" البيان">
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="addcenterid"> المركز</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <select type="text" id="addcenterid" name="addcenterid" class="form-control addcenterid list" placeholder=" المركز" style="width:100%"></select>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                       
+
+
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-12 ">
+                                                    <div class="pull-left">
+                                                        <button type="button" class="btn btn-default " data-dismiss="modal">رجوع</button>
+                                                        <button type="submit" class="btn btn-primary save">حفظ</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div><!-- /.row (main row) -->
+
+                    </div>
+                    @*<div class="modal-footer">
+
+                        </div>*@
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <!-- Edit Modal -->
+    <div class="example-modal">
+        <div class="modal fade in" id="edit-modal">
+            <div class="modal-dialog" style="width:80% !important">
+                <div class="modal-content">
+                    <div class="modal-header .no-border">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">تعديل الهيكل التنظيمي </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form method="post" id="edit-form">
+                                    <div class="box .no-border">
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                          
+                                            <div class="row">
+
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6">
+
+                                                        <input type="hidden" id="edid" />
+                                                      
+                                                          @*<div class="form-group">
+                                                            <label for="edlicensestypeid">نوع الترخيص</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <select type="text" id="edlicensestypeid" name="edlicensestypeid" class="form-control edlicensestypeid list" placeholder="نوع الترخيص" style="width:100%"></select>
+                                                            </div>
+                                                        </div>*@
+
+                                                        <div class="form-group">
+                                                            <label for="edcompanyid"> الشركة</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <select type="text" id="edcompanyid" name="edcompanyid" class="form-control edcompanyid list" placeholder="نوع الترخيص" style="width:100%"></select>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+                                                        <div class="form-group">
+                                                            <label for="edissuedate"> تاريخ الاصدار</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <input class="form-control calendar" name="edissuedate" id="edissuedate" placeholder="تاريخ الاصدار" autocomplete="off">
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="edexpirydate"> تاريخ الانتهاء</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <input class="form-control calendar" name="edexpirydate" id="edexpirydate" placeholder="تاريخ الانتهاء" autocomplete="off">
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+
+
+
+
+                                                        <div class="form-group">
+                                                            <label for="edstatement"> البيان</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <input type="text" id="edstatement" name="edstatement" class="form-control edstatement" placeholder=" البيان">
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="edcenterid"> المركز</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa  fa-book"></i>
+                                                                </div>
+                                                                <select type="text" id="edcenterid" name="edcenterid" class="form-control edcenterid list" placeholder=" المركز" style="width:100%"></select>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-12 ">
+                                                    <div class="pull-left">
+                                                        <button type="button" class="btn btn-default " data-dismiss="modal">رجوع</button>
+                                                        <button type="submit" class="btn btn-primary save">حفظ</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div><!-- /.row (main row) -->
+
+                    </div>
+                    @*<div class="modal-footer">
+
+                        </div>*@
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+
+
+
+
+}
+
+@section scripts{
+
+
+
+    <script>
+
+     
+
+        var dataTable;
+        $(document).ready(function () {
+
+            dataTable = $("#dataTable").DataTable({
+
+                "processing": true,
+                // "serverSide": true,
+                "ajax": {
+                    "url": "/EconomicLicense/GetAllItem",
+                    "type": "GET",
+                    "datatype": "json",
+                },
+                "columns": [
+
+                    { "data": "Id", "autowidth": true },
+                     {
+                         "data": "LicensesType", "width": "50px", "render": function (data) {
+                           
+                             return '<span class="label label-primary">' + data + '</span>';
+                         }
+                     },
+                    //{ "data": "LicensesType", "autowidth": true },
+                    { "data": "Company", "autowidth": true },
+                    { "data": "Center", "autowidth": true },
+                    { "data": "Statement", "autowidth": true },
+                    { "data": "IssueDate", "autowidth": true },
+                    { "data": "ExpiryDate", "autowidth": true },
+                    {
+                        "data": "PayedName", "width": "50px", "render": function (data) {
+                            var cssClass;
+                            if (data === "مدفوع") {
+                                cssClass = "label-warning";
+                            } else {
+                                cssClass = "label-success";
+                            }
+                            return '<span class="label ' + cssClass + '">' + data + '</span>';
+                        }
+                    },
+                    {
+                        
+                        "data": null, 
+                        "width": "150px",
+                        "render": function (data) {
+                            if (data.IsPayed) {
+                               
+                                return '<button class="btn btn-primary transfer btn-dataTable" onclick="getPrint(' + data.Id
+                                   + ')">طباعة</button>';
+                            } else {
+                                // Render Edit and Delete buttons if IsPayed == false
+                                return '<button class="btn btn-success transfer btn-dataTable" onclick="getData(' + data.Id
+                                    + ')">تعديل</button> <button class="btn btn-danger transfer btn-dataTable" onclick="getDataDelete(' + data.Id
+                                    + ')">حذف</button>';
+                            }
+                        }
+                    }
+                ],
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يعثر على أية سجلات",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sSearch": "ابحث:",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                },
+                "rowCallback": function (row, data) {
+                    // Check if IsPayed is true and change the row color
+                    if (data.IsPayed == true) {
+                        $(row).css('background-color', '#ffc107'); // Change to desired color
+                    }
+                }
+            });
+
+
+           
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $(function () {
+            $('.calendar').datepicker({
+                todayBtn: "linked",
+                language: "it",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy'
+            });
+        });
+       
+
+            function select2list(selector, url, placeholder) {
+                $(selector).select2({
+                    language: { inputTooShort: function () { return 'enter 1 letter at less'; } },
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        delay: 100,
+                        data: function (params) {
+                            return {
+                                q: params.term,
+                                page: params.page
+                            };
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data,
+                                pagination: {
+                                    more: ((data.total_count) > (params.page * 20))
+                                }
+                            };
+                        },
+                        cache: true
+                    },
+                    placeholder: placeholder,
+                    minimumInputLength: 1,
+                });
+
+            };
+            //select2list(".addlicensestypeid", "/EconomicLicense/GetLicensesType", "نوع الترخيص");
+            //select2list(".edlicensestypeid", "/EconomicLicense/GetLicensesType", "نوع الترخيص");
+
+            select2list(".addcompanyid", "/EconomicLicense/GetCompany", " الشركة");
+            select2list(".edcompanyid", "/EconomicLicense/GetCompany", " الشركة");
+
+            select2list(".addcenterid", "/EconomicLicense/GetCenter", " المركز");
+            select2list(".edcenterid", "/EconomicLicense/GetCenter", " المركز");
+
+
+         
+        
+            $('#add-form').bootstrapValidator({
+                onSuccess: function (e) {
+                    save();
+                    e.preventDefault();
+
+                },
+                submitButtons: 'button[type="submit"]',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok success-feedback-icons',
+                    invalid: 'glyphicon glyphicon-remove error-feedback-icons',
+                    validating: 'fa fa-refresh fa-spin success-feedback-icons'
+                },
+                fields: {
+                    //addlicensestypeid: {
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'يجب الا يكون حقل نوع الترخيص  فارغ'
+                    //        }
+                    //    }
+                    //},
+
+                    addstatement: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون حقل بيان الترخيص  فارغ'
+                            }
+                        }
+                    },
+
+                    addcompanyid: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون حقل  الشركة  فارغ'
+                            }
+                        }
+                    },
+                    addcenterid: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون حقل  المركز  فارغ'
+                            }
+                        }
+                    },
+                    addissuedate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون تاريخ  الاصدار  فارغ'
+                            }
+                        }
+                    },
+                    addexpirydate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'يجب الا يكون تاريخ  الانتهاء  فارغ'
+                            }
+                        }
+                    },
+
+
+                }
+            });
+
+            function save() 
+            {
+                var addissuedate = $('#addissuedate').val();
+                var formatissuedate = moment(addissuedate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                var addexpirydate = $('#addexpirydate').val();
+                var formatexpirydate = moment(addexpirydate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                var ob = {
+                   
+                    //"LicensesTypeId": $('#addlicensestypeid').val(),
+                    "CompanyId": $('#addcompanyid').val(),
+                    "CenterId": $('#addcenterid').val(),
+                    "Statement": $('#addstatement').val(),
+                    "IssueDate": formatissuedate,
+                    "ExpiryDate": formatexpirydate
+                };
+                $.ajax({
+                    url: "@Url.Action("Create", "EconomicLicense")",
+                    type: "POST",
+                data: JSON.stringify(ob),
+                contentType: "application/json charset=utf-8",
+                dataType: "json",
+                error: function (response) {
+                    //toastr[response.Status](response.Message, response.Title);
+                },
+                success: function (response) {
+                    //alert("ttt"+ response.CloseModel)
+                   
+                        toastr[response.Status](response.Message, response.Title);
+                        $('#add-form').bootstrapValidator('resetForm', true);
+                        $('#add-modal').modal('hide');
+                      
+                        dataTable.ajax.reload();
+                   
+                }
+            });
+            };
+        
+
+        
+
+        function getData(id) {
+
+      
+            $("#edit-modal").modal('show');
+            $.ajax({
+                type: "GET",
+                url: "/EconomicLicense/GetDataForUpdate/" + id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+
+                       
+                        $('#edid').val(response.Id);
+                     
+                        //var newOption = new Option(response.LicensesType, response.LicensesTypeId, true, true);
+                        //$('select[name="edlicensestypeid"]').append(newOption).trigger('change');
+
+                        var newOption = new Option(response.Company, response.CompanyId, true, true);
+                        $('select[name="edcompanyid"]').append(newOption).trigger('change');
+
+                        var newOption = new Option(response.Center, response.CenterId, true, true);
+                        $('select[name="edcenterid"]').append(newOption).trigger('change');
+
+
+                        //$('#edparentid').val(response.ParentId);
+                        $('#edstatement').val(response.Statement);
+                        //alert(response.IssueDate);
+                        var IssueDate = response.IssueDate == "" | response.IssueDate == null ? "" : moment(response.IssueDate, "YYYY-MM-DD").format("DD/MM/YYYY");
+                        $('input[name="edissuedate"]').val(IssueDate);
+
+                        var ExpiryDate = response.ExpiryDate == "" | response.ExpiryDate == null ? "" : moment(response.ExpiryDate, "YYYY-MM-DD").format("DD/MM/YYYY");
+                        $('input[name="edexpirydate"]').val(ExpiryDate);
+
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    //alert(response.responseText);
+                },
+                error: function (response) {
+                    //alert(response.responseText);
+                }
+            });
+
+        }
+
+        function getDataDelete(id) {
+
+            Swal.fire({
+                title: 'حذف الترخيص ',
+                text: "سيتم إزالة الشركة من التراخيص ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'موافق',
+                cancelButtonText: 'رجوع'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/EconomicLicense/Delete/" + id,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response != null) {
+
+                                if (response.message != null && response.message === "Used") {
+                                    //   toastr[response.Status](response.MessageText, response.Title);
+                                    toastr.error("لايمكن حذف هذا العنصر لانة اب لعناصر اخري ", "تعذر الحذف");
+                                }
+
+                                if (response.message != null && response.message === "Delete") {
+                                    toastr.success("تم الحذف الترخيص ", "الحذف");
+                                   
+                                    /// toastr[response.Status](response.MessageText, response.Title);
+                                }
+                                dataTable.ajax.reload();
+                            }
+                        },
+                        failure: function (response) {
+                            //alert(response.responseText);
+                        },
+                        error: function (response) {
+                            //alert(response.responseText);
+                        }
+                    });
+                }
+            })
+
+        }
+
+
+
+
+        //Validation And Save Edit Data
+        $('#edit-form').bootstrapValidator({
+            onSuccess: function (e) {
+                edit();
+                e.preventDefault();
+
+            },
+            submitButtons: 'button[type="submit"]',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok success-feedback-icons',
+                invalid: 'glyphicon glyphicon-remove error-feedback-icons',
+                validating: 'fa fa-refresh fa-spin success-feedback-icons'
+            },
+            fields: {
+                //edlicensestypeid: {
+                //    validators: {
+                //        notEmpty: {
+                //            message: 'يجب الا يكون حقل نوع الترخيص  فارغ'
+                //        }
+                //    }
+                //},
+
+                edstatement: {
+                    validators: {
+                        notEmpty: {
+                            message: 'يجب الا يكون حقل بيان الترخيص  فارغ'
+                        }
+                    }
+                },
+
+                edcompanyid: {
+                    validators: {
+                        notEmpty: {
+                            message: 'يجب الا يكون حقل  الشركة  فارغ'
+                        }
+                    }
+                },
+                edcenterid: {
+                    validators: {
+                        notEmpty: {
+                            message: 'يجب الا يكون حقل  المركز  فارغ'
+                        }
+                    }
+                },
+                edissuedate: {
+                    validators: {
+                        notEmpty: {
+                            message: 'يجب الا يكون تاريخ  الاصدار  فارغ'
+                        }
+                    }
+                },
+                edexpirydate: {
+                    validators: {
+                        notEmpty: {
+                            message: 'يجب الا يكون تاريخ  الانتهاء  فارغ'
+                        }
+                    }
+                },
+
+
+            }
+
+        });
+
+        function edit() {
+            var addissuedate = $('#edissuedate').val();
+            var formatissuedate = moment(addissuedate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            var addexpirydate = $('#edexpirydate').val();
+            var formatexpirydate = moment(addexpirydate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
+            var ob = {
+                "Id": $('#edid').val(),
+                //"LicensesTypeId": $('#edlicensestypeid').val(),
+                "CompanyId": $('#edcompanyid').val(),
+                "CenterId": $('#edcenterid').val(),
+                "Statement": $('#edstatement').val(),
+                "IssueDate": formatissuedate,
+                "ExpiryDate": formatexpirydate
+            };
+            $.ajax({
+                url: "@Url.Action("Edit", "EconomicLicense")",
+                type: "POST",
+            data: JSON.stringify(ob),
+            contentType: "application/json charset=utf-8",
+            dataType: "json",
+            error: function (response) {
+                //toastr[response.Status](response.Message, response.Title);
+            },
+            success: function (response) {
+                toastr[response.Status](response.Message, response.Title);
+          
+               
+                dataTable.ajax.reload();
+               
+                $('#edit-form').bootstrapValidator('resetForm', true);
+                $('#edit-modal').modal('hide');
+                // dataTable.ajax.reload();
+
+
+            }
+        });
+        };
+
+
+
+
+        //-----------------------------------------------------------------------------------------
+        function getPrint(id) {
+
+
+          
+            $.ajax({
+                type: "GET",
+                url: "/EconomicLicense/GetDataForUpdate/" + id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+
+                        var LicenseTypeId = response.LicensesTypeId;
+                        var Year = response.Year;
+                        var CompanyId = response.CompanyId;
+                        var url = "/Report/GetLicense?Id=" + id + "&&LicenseTypeId=" + LicenseTypeId + "&&Year=" + Year + "&&CompanyId=" + CompanyId;
+                        window.open(url, '_blank');
+                      
+
+
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    //alert(response.responseText);
+                },
+                error: function (response) {
+                    //alert(response.responseText);
+                }
+            });
+
+        }
+
+        function PrintData(id) {
+
+            //window.location.href = "/Report/GetLicense?Id=" + id;
+            var url = "/Report/GetLicense?Id=" + id;
+            window.open(url, '_blank');
+        }
+      
+        //-------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+}
+
