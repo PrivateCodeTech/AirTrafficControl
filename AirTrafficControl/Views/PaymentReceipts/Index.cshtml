@@ -1,9 +1,9 @@
-﻿@using AirTrafficControl.Models;
+@using AirTrafficControl.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Ar_Layout.cshtml";
 }
-
+@* mohamed eshag *@
 @section content{
 
     <!-- Content Wrapper. Contains page content -->
@@ -282,10 +282,31 @@
                     validating: 'fa fa-refresh fa-spin success-feedback-icons'
                 },
                 fields: {
-                    name: {
+                    edprice: {
                         validators: {
                             notEmpty: {
-                                message: 'يجب الا يكون حقل اسم الموظف  فارغ'
+                                message: 'الرجاء ادخال السعر'
+                            }
+                        }
+                    },
+                    edtax: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء ادخال الضريبة'
+                            }
+                        }
+                    },
+                    edstamp: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء ادخال الدمغة'
+                            }
+                        }
+                    },
+                    edpaymentReceiptPath: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء رفع ايصال التوريد'
                             }
                         }
                     },
