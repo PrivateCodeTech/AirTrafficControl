@@ -161,7 +161,7 @@
                                                         <label for="edprice"> السعر </label>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                                                            <input class="form-control  edprice" name="edprice" id="edprice" placeholder="السعر" autocomplete="off" />
+                                                            <input class="form-control  edprice" disabled name="edprice" id="edprice" placeholder="السعر" autocomplete="off" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -188,7 +188,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-6">
+                                                @*<div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="edpaymentReceiptPath">  صوره من التوريد </label>
                                                         <div class="input-group">
@@ -198,7 +198,7 @@
                                                             <input class="form-control  edpaymentReceiptPath" name="edpaymentReceiptPath" id="edpaymentReceiptPath" type="file" placeholder=" اضافة توريد" autocomplete="off" />
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 <div class="col-lg-3">
                                                     <button type="submit" class="btn btn-primary edit" value="edit" style="width: 100%;position: relative;top: 25px;">توريد</button>
                                                 </div>
@@ -291,7 +291,7 @@
                             "orderable": false,
                             "render": function (data) {
                                 return '<div class="btn-opreation">'
-                                             + '<button class="btn btn-primary pull-left btn-add " onclick="editPaymentReceipt(' + data.Id + ')">إضافة اذن التوريد<i class=" transfer-fa fa  fa-edit"></i></button> '
+                                             + '<button class="btn btn-primary pull-left btn-add " onclick="editPaymentReceipt(' + data.Id + "," + data.Price + ')">إضافة اذن التوريد<i class=" transfer-fa fa  fa-edit"></i></button> '
                                     + '</div> ';
 
                             }
@@ -325,11 +325,11 @@
                 formData.append('LicenseId', ob.LicenseId);
 
                 // Append file if present
-                var fileUpload = $("#edpaymentReceiptPath").get(0);
-                var files = fileUpload.files;
-                if (files.length > 0) {
-                    formData.append('paymentReceiptPath', files[0]);
-                }
+                //var fileUpload = $("#edpaymentReceiptPath").get(0);
+                //var files = fileUpload.files;
+                //if (files.length > 0) {
+                //    formData.append('paymentReceiptPath', files[0]);
+                //}
 
                
                     $.ajax({
@@ -374,8 +374,9 @@
             });
         });//End Document Ready
 
-        function editPaymentReceipt(id) {
+        function editPaymentReceipt(id, price) {
             $('#paymentReceiptId').text(id);
+            $('#edprice').val(price);
             $('#edit-modal').modal("show");
         }
     </script>

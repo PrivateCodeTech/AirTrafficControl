@@ -8,7 +8,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--font-->
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="~/AdminLTE-RTL-master/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/AdminLTE-RTL-master/bootstrap/css/bootstrap.min.css" />
+    <link href="~/AdminLTE-RTL-master/plugins/select2/select2.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -30,6 +31,7 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
     <style>
 
         @@font-face {
@@ -366,9 +368,11 @@
                         <a href="#">
                             <i class="fa fa-laptop"></i>
                             <span>الاذونات</span>
+
                             <i class="label label-danger pull-left">2</i>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="@Url.Action("IndexForLicense","PaymentReceipts")"><i class="fa fa-circle-o text-success"></i> إذن توريد مالى </a></li>
                             <li><a href="pages/UI/general.html"><i class="fa fa-circle-o text-danger"></i>  </a></li>
                             <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o text-danger"></i>  </a></li>
                         </ul>
@@ -648,6 +652,8 @@
     <script src="~/AdminLTE-RTL-master/bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="~/AdminLTE-RTL-master/plugins/fastclick/fastclick.min.js"></script>
+
+    <script src="~/AdminLTE-RTL-master/plugins/select2/select2.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/AdminLTE-RTL-master/dist/js/app.min.js"></script>
     <!-- Sparkline -->
