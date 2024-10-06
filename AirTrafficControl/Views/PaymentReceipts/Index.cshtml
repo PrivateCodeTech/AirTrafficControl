@@ -213,6 +213,7 @@
                                 return '<div class="btn-opreation">'
                                              + '<button class="btn btn-warning transfer " onclick="editPaymentReceipt(' + data.Id + ')">تعديل<i class=" transfer-fa fa  fa-edit"></i></button> '
                                              + '<button class="btn btn-danger delete " onclick="deletePaymentReceipt(' + data.Id + ')">حذف<i class=" transfer-fa fa fa-trash"></i></button> '
+                                     + '<button class="btn btn-primary btn-sm" onclick="PrintData(' + data.Id + ')">طباعة<i class=" transfer-fa "></i></button> '
                                     + '</div> ';
 
                             }
@@ -282,10 +283,31 @@
                     validating: 'fa fa-refresh fa-spin success-feedback-icons'
                 },
                 fields: {
-                    name: {
+                    edprice: {
                         validators: {
                             notEmpty: {
-                                message: 'يجب الا يكون حقل اسم الموظف  فارغ'
+                                message: 'الرجاء ادخال السعر'
+                            }
+                        }
+                    },
+                    edtax: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء ادخال الضريبة'
+                            }
+                        }
+                    },
+                    edstamp: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء ادخال الدمغة'
+                            }
+                        }
+                    },
+                    edpaymentReceiptPath: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء رفع ايصال التوريد'
                             }
                         }
                     },
@@ -333,6 +355,16 @@
             });
 
         }
+
+
+
+        function PrintData(id) {
+
+            //window.location.href = "/Report/GetLicense?Id=" + id;
+            var url = "/Report/PrintData?Id=" + id;
+            window.open(url, '_blank');
+        }
+
 
     </script>
 

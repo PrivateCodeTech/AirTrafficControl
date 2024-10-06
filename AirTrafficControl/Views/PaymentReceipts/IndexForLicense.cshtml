@@ -363,10 +363,17 @@
                     validating: 'fa fa-refresh fa-spin success-feedback-icons'
                 },
                 fields: {
-                    name: {
+                    edtax: {
                         validators: {
                             notEmpty: {
-                                message: 'يجب الا يكون حقل اسم الموظف  فارغ'
+                                message: 'الرجاء ادخال الضريبة'
+                            }
+                        }
+                    },
+                    edstamp: {
+                        validators: {
+                            notEmpty: {
+                                message: 'الرجاء ادخال الدمغة'
                             }
                         }
                     },
