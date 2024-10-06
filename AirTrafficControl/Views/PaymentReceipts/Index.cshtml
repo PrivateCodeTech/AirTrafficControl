@@ -1,4 +1,4 @@
-@using AirTrafficControl.Models;
+﻿@using AirTrafficControl.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Ar_Layout.cshtml";
@@ -211,9 +211,9 @@
                             "orderable": false,
                             "render": function (data) {
                                 return '<div class="btn-opreation">'
-                                             + '<button class="btn btn-warning transfer btn-sm" onclick="editPaymentReceipt(' + data.Id + ')">تعديل<i class=" transfer-fa fa  fa-edit"></i></button> '
-                                             + '<button class="btn btn-danger delete btn-sm" onclick="deletePaymentReceipt(' + data.Id + ')">حذف<i class=" transfer-fa fa fa-trash"></i></button> '
-                                      + '<button class="btn btn-primary btn-sm" onclick="PrintData(' + data.Id + ')">طباعة<i class=" transfer-fa fa fa-trash"></i></button> '
+                                             + '<button class="btn btn-warning transfer " onclick="editPaymentReceipt(' + data.Id + ')">تعديل<i class=" transfer-fa fa  fa-edit"></i></button> '
+                                             + '<button class="btn btn-danger delete " onclick="deletePaymentReceipt(' + data.Id + ')">حذف<i class=" transfer-fa fa fa-trash"></i></button> '
+                                     + '<button class="btn btn-primary btn-sm" onclick="PrintData(' + data.Id + ')">طباعة<i class=" transfer-fa "></i></button> '
                                     + '</div> ';
 
                             }
@@ -364,15 +364,6 @@
             var url = "/Report/PrintData?Id=" + id;
             window.open(url, '_blank');
         }
-
-
-
-
-
-
-
-
-
 
 
     </script>

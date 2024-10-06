@@ -113,8 +113,8 @@ namespace AirTrafficControl.Controllers
                     EmployerName = p.Company.EmployerName ?? "",
                     CenterName = p.Centre.Name ?? "",
                     Statement = p.Statement ?? "",
-                    //IssueDate = p.IssueDate.ToString(),
-                    //ExpiryDate = p.ExpiryDate.ToString(),
+                    IssueDate = p.IssueDate.ToString(),
+                    ExpiryDate = p.ExpiryDate.ToString(),
                     Year = p.Year ?? 0,
                     IsPayed = p.IsPayed ?? false,
                     //
