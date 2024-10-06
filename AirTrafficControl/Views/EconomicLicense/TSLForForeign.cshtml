@@ -418,7 +418,7 @@
                         "render": function (data) {
                             if (data.IsPayed) {
 
-                                return '<button class="btn btn-primary transfer btn-dataTable" onclick="Print(' + data.Id
+                                return '<button class="btn btn-primary transfer btn-dataTable" onclick="getPrint(' + data.Id
                                    + ')">طباعة</button>';
                             } else {
                                 // Render Edit and Delete buttons if IsPayed == false
@@ -826,6 +826,39 @@
 
 
 
+        function getPrint(id) {
+
+
+
+            $.ajax({
+                type: "GET",
+                url: "/EconomicLicense/GetDataForUpdate/" + id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+
+                        var LicenseTypeId = response.LicensesTypeId;
+                        var Year = response.Year;
+                        var CompanyId = response.CompanyId;
+                        var url = "/Report/GetLicense?Id=" + id + "&&LicenseTypeId=" + LicenseTypeId + "&&Year=" + Year + "&&CompanyId=" + CompanyId;
+                        window.open(url, '_blank');
+
+
+
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    //alert(response.responseText);
+                },
+                error: function (response) {
+                    //alert(response.responseText);
+                }
+            });
+
+        }
 
 
 
