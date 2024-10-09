@@ -59,6 +59,8 @@ namespace AirTrafficControl.Controllers
                 F.Stamp = Convert.ToDecimal(item?.Stamp);
                 F.Tax = Convert.ToDecimal(item?.Tax);
                 F.TotalAmount = Convert.ToDecimal(item?.TotalAmount);
+                F.Job = "دائرة النقل الجوي";
+                F.Admin = "سامي محمد الامين";
                 ReceiptList.Add(F);
             }
 
@@ -72,6 +74,8 @@ namespace AirTrafficControl.Controllers
                 Name = p.Name,
                 Type = p.Type,
                 Word = p.Word,
+                Admin = p.Admin,
+                Job = p.Job,
             }).ToList());
 
 
@@ -94,29 +98,56 @@ namespace AirTrafficControl.Controllers
             rd.Load(Path.Combine(Server.MapPath("~/Reports/License/LicenseRep.rpt")));
             IQueryable<License> License;
             License = db.Licenses;
+            // --------------------Solve Convert Problem By DTO-------------------------------------------------------
 
+            var LicenseList = new List<LicenseModel>();
+
+            foreach (var p in License)
+            {
+                LicenseModel F = new LicenseModel();
+                F.Id = p.Id;
+                F.LicensesTypeId = Convert.ToInt32(p.LicensesTypeId);
+                F.LicensesType = p.LicensesType.Name;
+                F.CompanyId = p.Company.Id;
+                F.CompanyName = p.Company.CommercialName;
+                F.CommercialName = p.Company.CommercialName;
+                F.CommercialNo = Convert.ToInt32(p.Company.CommercialNo);
+                F.Phone = p.Company.Phone;
+                F.Email = p.Company.Email;
+                F.EmployerName = p.Company.EmployerName;
+                F.CenterName = p.Centre.Name;
+                F.Statement = p.Statement;
+                F.IssueDate = Convert.ToDateTime(p.IssueDate).ToString("yyyy-MM-dd");
+                F.ExpiryDate = Convert.ToDateTime(p.ExpiryDate).ToString("yyyy-MM-dd");
+                F.Year = p.Year ?? 0;
+                F.IsPayed = p.IsPayed ?? false;
+                LicenseList.Add(F);
+            }
+
+
+            //-------------------------------------------------------------------------------------------------
 
             if (Id != null)
             {
 
-                rd.SetDataSource(License.Select(p => new
+                rd.SetDataSource(LicenseList.Where(x=>x.Id == Id).Select(p => new
                 {
                     Id = p.Id,
-                    LicensesTypeId = p.LicensesTypeId ?? 0,
-                    LicensesType = p.LicensesType.Name ?? "",
-                    CompanyId = p.Company.Id,
-                    CompanyName = p.Company.CommercialName ?? "",
-                    CommercialName = p.Company.CommercialName ?? "",
-                    CommercialNo = p.Company.CommercialNo ?? 0,
-                    Phone = p.Company.Phone ?? "",
-                    Email = p.Company.Email ?? "",
-                    EmployerName = p.Company.EmployerName ?? "",
-                    CenterName = p.Centre.Name ?? "",
-                    Statement = p.Statement ?? "",
+                    LicensesTypeId = p.LicensesTypeId,
+                    LicensesType = p.LicensesType,
+                    CompanyId = p.CompanyId,
+                    CompanyName = p.CompanyName,
+                    CommercialName = p.CommercialName,
+                    CommercialNo = p.CommercialNo,
+                    Phone = p.Phone,
+                    Email = p.Email,
+                    EmployerName = p.EmployerName,
+                    CenterName = p.CenterName,
+                    Statement = p.Statement,
                     IssueDate = p.IssueDate.ToString(),
                     ExpiryDate = p.ExpiryDate.ToString(),
-                    Year = p.Year ?? 0,
-                    IsPayed = p.IsPayed ?? false,
+                    Year = p.Year,
+                    IsPayed = p.IsPayed,
                     //
 
                 }).Where(c => c.Id == Id).ToList());
@@ -213,11 +244,33 @@ namespace AirTrafficControl.Controllers
             public decimal Tax { get; set; }
             public decimal TotalAmount { get; set; }
             public decimal Stamp { get; set; }
-
+            public string Admin { get; set; }
+            public string Job { get; set; }
 
 
         }
+        public class LicenseModel
+        {
+            public int Id { get; set; }
+            public string CommercialName { get; set; }
+            public int LicensesTypeId { get; set; }
+            public string LicensesType { get; set; }
+            public int CommercialNo { get; set; }
+            public string EmployerName { get; set; }
+          
+            public string Admin { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
+            public int CompanyId { get; set; }
+            public string CompanyName { get; set; }
+            public string CenterName { get; set; }
+            public string Statement { get; set; }
+            public int Year { get; set; }
+            public bool IsPayed { get; set; }
+            public string IssueDate { get; set; }
+            public string ExpiryDate { get; set; }
 
+        }
 
     }
 }

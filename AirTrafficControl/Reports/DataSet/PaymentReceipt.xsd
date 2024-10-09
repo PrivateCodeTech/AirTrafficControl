@@ -12,7 +12,7 @@
   <xs:element name="PaymentReceipt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PaymentReceipt" msprop:Generator_UserDSName="PaymentReceipt">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PaymentReceipt" msprop:Generator_TableClassName="PaymentReceiptDataTable" msprop:Generator_TableVarName="tablePaymentReceipt" msprop:Generator_RowChangedName="PaymentReceiptRowChanged" msprop:Generator_TablePropName="_PaymentReceipt" msprop:Generator_RowDeletingName="PaymentReceiptRowDeleting" msprop:Generator_RowChangingName="PaymentReceiptRowChanging" msprop:Generator_RowEvHandlerName="PaymentReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="PaymentReceiptRowDeleted" msprop:Generator_RowClassName="PaymentReceiptRow" msprop:Generator_UserTableName="PaymentReceipt" msprop:Generator_RowEvArgName="PaymentReceiptRowChangeEvent">
+        <xs:element name="PaymentReceipt" msprop:Generator_TableClassName="PaymentReceiptDataTable" msprop:Generator_TableVarName="tablePaymentReceipt" msprop:Generator_TablePropName="_PaymentReceipt" msprop:Generator_RowDeletingName="PaymentReceiptRowDeleting" msprop:Generator_RowChangingName="PaymentReceiptRowChanging" msprop:Generator_RowEvHandlerName="PaymentReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="PaymentReceiptRowDeleted" msprop:Generator_UserTableName="PaymentReceipt" msprop:Generator_RowChangedName="PaymentReceiptRowChanged" msprop:Generator_RowEvArgName="PaymentReceiptRowChangeEvent" msprop:Generator_RowClassName="PaymentReceiptRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:string" minOccurs="0" />
@@ -22,6 +22,8 @@
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
               <xs:element name="Word" msprop:Generator_ColumnVarNameInTable="columnWord" msprop:Generator_ColumnPropNameInRow="Word" msprop:Generator_ColumnPropNameInTable="WordColumn" msprop:Generator_UserColumnName="Word" type="xs:string" minOccurs="0" />
               <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type" type="xs:string" minOccurs="0" />
+              <xs:element name="Admin" msprop:Generator_ColumnVarNameInTable="columnAdmin" msprop:Generator_ColumnPropNameInRow="Admin" msprop:Generator_ColumnPropNameInTable="AdminColumn" msprop:Generator_UserColumnName="Admin" type="xs:string" minOccurs="0" />
+              <xs:element name="Job" msprop:Generator_ColumnVarNameInTable="columnJob" msprop:Generator_ColumnPropNameInRow="Job" msprop:Generator_ColumnPropNameInTable="JobColumn" msprop:Generator_UserColumnName="Job" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

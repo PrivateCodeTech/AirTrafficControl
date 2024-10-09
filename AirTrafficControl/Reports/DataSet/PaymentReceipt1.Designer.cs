@@ -293,6 +293,10 @@ namespace AirTrafficControl.Reports.DataSet {
             
             private global::System.Data.DataColumn columnType;
             
+            private global::System.Data.DataColumn columnAdmin;
+            
+            private global::System.Data.DataColumn columnJob;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PaymentReceiptDataTable() {
@@ -384,6 +388,22 @@ namespace AirTrafficControl.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AdminColumn {
+                get {
+                    return this.columnAdmin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn JobColumn {
+                get {
+                    return this.columnJob;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -419,7 +439,7 @@ namespace AirTrafficControl.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PaymentReceiptRow AddPaymentReceiptRow(string Price, decimal Tax, decimal Stamp, decimal TotalAmount, string Name, string Word, string Type) {
+            public PaymentReceiptRow AddPaymentReceiptRow(string Price, decimal Tax, decimal Stamp, decimal TotalAmount, string Name, string Word, string Type, string Admin, string Job) {
                 PaymentReceiptRow rowPaymentReceiptRow = ((PaymentReceiptRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Price,
@@ -428,7 +448,9 @@ namespace AirTrafficControl.Reports.DataSet {
                         TotalAmount,
                         Name,
                         Word,
-                        Type};
+                        Type,
+                        Admin,
+                        Job};
                 rowPaymentReceiptRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPaymentReceiptRow);
                 return rowPaymentReceiptRow;
@@ -458,6 +480,8 @@ namespace AirTrafficControl.Reports.DataSet {
                 this.columnName = base.Columns["Name"];
                 this.columnWord = base.Columns["Word"];
                 this.columnType = base.Columns["Type"];
+                this.columnAdmin = base.Columns["Admin"];
+                this.columnJob = base.Columns["Job"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -477,6 +501,10 @@ namespace AirTrafficControl.Reports.DataSet {
                 base.Columns.Add(this.columnWord);
                 this.columnType = new global::System.Data.DataColumn("Type", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnType);
+                this.columnAdmin = new global::System.Data.DataColumn("Admin", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAdmin);
+                this.columnJob = new global::System.Data.DataColumn("Job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnJob);
                 this.ExtendedProperties.Add("Generator_TablePropName", "_PaymentReceipt");
                 this.ExtendedProperties.Add("Generator_UserTableName", "PaymentReceipt");
             }
@@ -733,6 +761,38 @@ namespace AirTrafficControl.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Admin {
+                get {
+                    try {
+                        return ((string)(this[this.tablePaymentReceipt.AdminColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Admin\' in table \'PaymentReceipt\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePaymentReceipt.AdminColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Job {
+                get {
+                    try {
+                        return ((string)(this[this.tablePaymentReceipt.JobColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Job\' in table \'PaymentReceipt\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePaymentReceipt.JobColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPriceNull() {
                 return this.IsNull(this.tablePaymentReceipt.PriceColumn);
             }
@@ -813,6 +873,30 @@ namespace AirTrafficControl.Reports.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTypeNull() {
                 this[this.tablePaymentReceipt.TypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAdminNull() {
+                return this.IsNull(this.tablePaymentReceipt.AdminColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAdminNull() {
+                this[this.tablePaymentReceipt.AdminColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsJobNull() {
+                return this.IsNull(this.tablePaymentReceipt.JobColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetJobNull() {
+                this[this.tablePaymentReceipt.JobColumn] = global::System.Convert.DBNull;
             }
         }
         
